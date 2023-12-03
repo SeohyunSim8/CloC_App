@@ -1,4 +1,4 @@
-import React from 'react';
+/*import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { theme } from '../core/theme'
 
@@ -85,3 +85,36 @@ const styles = StyleSheet.create({
         color: theme.colors.primary,
     },
 })
+*/
+
+import * as React from 'react';
+import * as WebBrowser from 'expo-web-browser';
+import * as Google from 'expo-auth-session/providers/google';
+import { Button } from 'react-native';
+
+WebBrowser.maybeCompleteAuthSession();
+
+export default function LoginScreen() {
+    const [request, response, promptAsync] = Google.useAuthRequest({
+        expoClientId: 'GOOGLE_GUID.apps.googleusercontent.com',
+        iosClientId: 'GOOGLE_GUID.apps.googleusercontent.com',
+        androidClientId: 'GOOGLE_GUID.apps.googleusercontent.com',
+        webClientId: 'GOOGLE_GUID.apps.googleusercontent.com',
+    });
+
+    React.useEffect(() => {
+        if (response?.type === 'success') {
+            const { authentication } = response;
+        }
+    }, [response]);
+
+    return (
+        <Button
+            disabled={!request}
+            title="Login"
+            onPress={() => {
+                promptAsync();
+            }}
+        />
+    );
+}

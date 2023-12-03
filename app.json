@@ -1,10 +1,12 @@
 {
   "expo": {
     "android": {
+      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.xxx.xxx"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -16,15 +18,17 @@
     },
     "icon": "./assets/icon.png",
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.xxx.xxx"
     },
     "name": "CloC",
     "orientation": "portrait",
     "slug": "CloC",
+    "scheme": "myapp",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/logo.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#000000"
     },
     "userInterfaceStyle": "light",
     "version": "1.0.0",
@@ -32,6 +36,4 @@
       "favicon": "./assets/favicon.png"
     }
   }
-
-
 }

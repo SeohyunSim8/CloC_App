@@ -1,11 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\components",
-    "\\core",
-    "\\helpers",
     "\\src"
   ],
-  "SelectedNode": "\\src\\Dashboard.js",
+  "SelectedNode": "\\src\\fbase.js",
   "PreviewInSolutionExplorer": false
 }
