@@ -1,7 +1,7 @@
-/*import React from 'react';
+import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { theme } from '../core/theme'
-
+/*
 export default function LoginScreen({ navigation }) {
     const [email, setEmail] = useState({ value: '', error: '' })
     const [password, setPassword] = useState({ value: '', error: '' })
@@ -119,17 +119,19 @@ const styles = StyleSheet.create({
 //     );
 // }
 
-import { GoogleSignin, GoogleSigninButton } from '@react-native-google-signin/google-signin';
-import auth from '@react-native-firebase/auth'
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
+ 
+export default function LoginScreen({ navigation }) {
+    const onGoogleButtonPress = async () => {
+        const { idToken } = await GoogleSignin.signIn();
+        const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+        return auth().signInWithCredential(googleCredential);
+    }
 
-const onGoogleButtonPress = async () => {
-    const { idToken } = await GoogleSignin.signIn();
-    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-    return auth().signInWithCredential(googleCredential);
+    return (
+        <View style={StyleSheet.rootContainer}>
+            <GoogleSigninButton onPress={() => onGoogleButtonPress()} />
+        </View>
+    )
 }
 
-return (
-    <View style={StyleSheet.rootContainer}>
-        <GoogleSigninButton onPress={() => onGoogleButtonPress()} />
-    </View>
-)
