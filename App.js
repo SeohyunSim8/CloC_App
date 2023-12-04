@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Provider } from 'react-native-paper'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
@@ -11,6 +11,7 @@ import {
     Dashboard,
 } from './src'
 import BottomTabNavigator from './src/BottomTabNavigator';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
 const Stack = createStackNavigator()
 
@@ -35,3 +36,14 @@ export default function App() {
         </Provider>
     )
 }
+
+const googleSigninConfigure = () => {
+    GoogleSignin.configure({
+      webClientId:
+        '485093561661-s476qa0b9kueqni56u5lq9mjr9n78rsl.apps.googleusercontent.com',
+    })
+  }
+
+useEffect(() => {
+    googleSigninConfigure();
+})

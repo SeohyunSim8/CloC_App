@@ -50,14 +50,14 @@ export default function LoginScreen({ navigation }) {
                 <TouchableOpacity
                     onPress={() => navigation.navigate('ResetPasswordScreen')}
                 >
-                    <Text style={styles.forgot}>Forgot your password?</Text>
+                    <Text style=w{styles.forgot}>Forgot your password?</Text>
                 </TouchableOpacity>
             </View>
             <Button mode="contained" onPress={onLoginPressed}>
                 Login
             </Button>
             <View style={styles.row}>
-                <Text>Don¡¯t have an account? </Text>
+                <Text>Donï¿½ï¿½t have an account? </Text>
                 <TouchableOpacity onPress={() => navigation.replace('RegisterScreen')}>
                     <Text style={styles.link}>Sign up</Text>
                 </TouchableOpacity>
@@ -87,34 +87,49 @@ const styles = StyleSheet.create({
 })
 */
 
-import * as React from 'react';
-import * as WebBrowser from 'expo-web-browser';
-import * as Google from 'expo-auth-session/providers/google';
-import { Button } from 'react-native';
+// import * as React from 'react';
+// import * as WebBrowser from 'expo-web-browser';
+// import * as Google from 'expo-auth-session/providers/google';
+// import { Button } from 'react-native';
 
-WebBrowser.maybeCompleteAuthSession();
+// WebBrowser.maybeCompleteAuthSession();
 
-export default function LoginScreen() {
-    const [request, response, promptAsync] = Google.useAuthRequest({
-        expoClientId: 'GOOGLE_GUID.apps.googleusercontent.com',
-        iosClientId: 'GOOGLE_GUID.apps.googleusercontent.com',
-        androidClientId: 'GOOGLE_GUID.apps.googleusercontent.com',
-        webClientId: 'GOOGLE_GUID.apps.googleusercontent.com',
-    });
+// export default function LoginScreen() {
+//     const [request, response, promptAsync] = Google.useAuthRequest({
+//         expoClientId: 'GOOGLE_GUID.apps.googleusercontent.com',
+//         iosClientId: 'GOOGLE_GUID.apps.googleusercontent.com',
+//         androidClientId: 'GOOGLE_GUID.apps.googleusercontent.com',
+//         webClientId: 'GOOGLE_GUID.apps.googleusercontent.com',
+//     });
 
-    React.useEffect(() => {
-        if (response?.type === 'success') {
-            const { authentication } = response;
-        }
-    }, [response]);
+//     React.useEffect(() => {
+//         if (response?.type === 'success') {
+//             const { authentication } = response;
+//         }
+//     }, [response]);
 
-    return (
-        <Button
-            disabled={!request}
-            title="Login"
-            onPress={() => {
-                promptAsync();
-            }}
-        />
-    );
+//     return (
+//         <Button
+//             disabled={!request}
+//             title="Login"
+//             onPress={() => {
+//                 promptAsync();
+//             }}
+//         />
+//     );
+// }
+
+import { GoogleSignin, GoogleSigninButton } from '@react-native-google-signin/google-signin';
+import auth from '@react-native-firebase/auth'
+
+const onGoogleButtonPress = async () => {
+    const { idToken } = await GoogleSignin.signIn();
+    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+    return auth().signInWithCredential(googleCredential);
 }
+
+return (
+    <View style={StyleSheet.rootContainer}>
+        <GoogleSigninButton onPress={() => onGoogleButtonPress()} />
+    </View>
+)
